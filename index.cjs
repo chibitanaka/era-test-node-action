@@ -48,6 +48,7 @@ async function run() {
     const resolveHashes = getInput('resolveHashes');
     const log = getInput('log');
     const logFilePath = getInput('logFilePath');
+    const timeout = parseInt(getInput('timeout')) || 15000;
 
     let toolPath = tc.find('era_test_node', ERA_TEST_NODE_RELEASE_TAG);
 
@@ -130,7 +131,7 @@ async function run() {
         console.error('Health check failed: era_test_node appears to be not running.');
         setFailed('Failed to start era_test_node');
       }
-    }, 5000);
+    }, timeout);
 
   } catch (error) {
     setFailed(error.message);
